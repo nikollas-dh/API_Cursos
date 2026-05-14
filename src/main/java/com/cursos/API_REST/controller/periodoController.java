@@ -1,7 +1,8 @@
 package com.cursos.API_REST.controller;
 
-import com.cursos.API_REST.Cursos.CursoRepository;
 import com.cursos.API_REST.Cursos.DadosListagemCurso;
+import com.cursos.API_REST.periodo.Periodo;
+import com.cursos.API_REST.periodo.PeriodoRepository;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,21 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("cursos/periodos")
 public class periodoController {
 
     @Autowired
-    private CursoRepository cursoRepository;
+    private PeriodoRepository periodoRepository;
 
     @GetMapping
-    @ResponseStatus
-    public ResponseEntity<Page<DadosListagemCurso>> listarPeriodo(@PageableDefault(size = 10, sort ={"nome"}) @ParameterObject Pageable paginacao) {
-        var page = cursoRepository.findAllByAtivoTrue(paginacao)
-                .map(DadosListagemCurso::new);
+    public ResponseEntity<List<String>> listarPeriodo() {
+        var periodos = Arrays.stream(Periodo.values())
+                .map(Enum::name)
+                .toList();
 
-        return ResponseEntity.ok(page);
-
-
+        return ResponseEntity.ok(periodos); // Retorna 200 OK com a lista
     }
 }

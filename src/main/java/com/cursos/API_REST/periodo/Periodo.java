@@ -1,4 +1,4 @@
-package com.cursos.API_REST.Cursos;
+package com.cursos.API_REST.periodo;
 
 public enum Periodo {
     Matutino,

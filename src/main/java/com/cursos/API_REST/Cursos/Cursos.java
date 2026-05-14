@@ -1,11 +1,11 @@
 package com.cursos.API_REST.Cursos;
 
+import com.cursos.API_REST.periodo.Periodo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Table(name = "cursos")
 @Entity(name = "cursos")
