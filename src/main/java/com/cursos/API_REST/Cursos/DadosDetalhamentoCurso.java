@@ -1,11 +1,11 @@
 package com.cursos.API_REST.Cursos;
 
-public record DadosListagemCurso(
+public record DadosDetalhamentoCurso(
         long id,
         String nome,
         Periodo periodo
 ) {
-    public DadosListagemCurso(Cursos curso){
+    public DadosDetalhamentoCurso(Cursos curso){
         this(
                 curso.getId(),
                 curso.getNome(),

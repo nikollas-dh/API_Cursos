@@ -1,9 +1,6 @@
 package com.cursos.API_REST.controller;
 
-import com.cursos.API_REST.Cursos.CursoRepository;
-import com.cursos.API_REST.Cursos.Cursos;
-import com.cursos.API_REST.Cursos.DadosCadastroCurso;
-import com.cursos.API_REST.Cursos.DadosListagemCurso;
+import com.cursos.API_REST.Cursos.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springdoc.core.annotations.ParameterObject;
@@ -42,10 +39,19 @@ public class cursoController {
     }
 
     @GetMapping
+    @ResponseStatus
     public ResponseEntity<Page<DadosListagemCurso>> listarCursos(@PageableDefault(size = 10, sort ={"nome"}) @ParameterObject Pageable paginacao){
         var page = cursoRepository.findAllByAtivoTrue(paginacao)
                 .map(DadosListagemCurso::new);
 
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus
+    public ResponseEntity ListarCursoId(@PathVariable long id){
+        var curso = cursoRepository.findByIdAndAtivoTrue(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
+        return ResponseEntity.ok(new DadosDetalhamentoCurso(curso));
     }
 }
