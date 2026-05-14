@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Table(name = "cursos")
 @Entity(name = "cursos")
@@ -32,5 +33,4 @@ public class Cursos {
     public void excluirCurso() {
         this.ativo = false;
     }
-
 }
