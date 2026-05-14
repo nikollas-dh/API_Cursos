@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("cursos")
 public class cursoController {
 
     @Autowired
@@ -54,4 +54,14 @@ public class cursoController {
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
         return ResponseEntity.ok(new DadosDetalhamentoCurso(curso));
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoCurso> atualizarCurso(@RequestBody @Valid DadosAtualizarProduto dados, @PathVariable long id) {
+        var curso = cursoRepository.findByIdAndAtivoTrue(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Curso não encontrado"));
+        curso.editarCurso(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoCurso(curso));
+    }
+
+
 }

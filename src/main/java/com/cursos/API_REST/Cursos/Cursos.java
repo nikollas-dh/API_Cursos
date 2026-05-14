@@ -33,4 +33,12 @@ public class Cursos {
     public void excluirCurso() {
         this.ativo = false;
     }
+    public void editarCurso(DadosAtualizarProduto dados){
+        if(dados.nome() != null && !dados.nome().isBlank()){
+            this.nome = dados.nome();
+        }
+        if (dados.periodo()!= null){
+            this.periodo = dados.periodo();
+        }
+    }
 }
