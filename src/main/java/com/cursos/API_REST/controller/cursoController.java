@@ -31,6 +31,7 @@ import org.springframework.web.server.ResponseStatusException;
         @Tag(name = "Excluir Curso",description = "Excluir"),
         @Tag(name = "Atualizar Curso",description = "Atualizar")
 })
+@CrossOrigin(origins = "http://localhost:5173")
 public class cursoController {
 
     @Autowired
